@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+asyncmy # For MariaDB async driver
+pydantic
+pydantic-settings
+fastapi-jwt-auth
+passlib[bcrypt] # For password hashing
+python-dotenv # To load .env files for local development
+alembic     # For database migrations
+# For inter-service communication (optional, can be added later if needed by auth_service directly)
+# httpx
+# For testing
+pytest
+pytest-asyncio
+httpx # For making requests to the app in tests
