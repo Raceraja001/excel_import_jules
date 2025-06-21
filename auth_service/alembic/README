@@ -1,0 +1,28 @@
+Generic single-database configuration.
+
+This is the Alembic configuration file for the auth_service.
+
+Key files:
+
+- `alembic.ini`: Main configuration file. Sets the database URL (can be overridden by environment variables via `env.py`).
+- `env.py`: Script that is run when `alembic` command is invoked. Configured for async SQLAlchemy. It imports your application's `Base` metadata and database settings.
+- `script.py.mako`: Template for new migration scripts.
+- `versions/`: Directory where migration scripts are stored.
+
+Common commands:
+
+- `alembic revision -m "create_some_table"`: Generate a new revision file.
+- `alembic upgrade head`: Apply all migrations up to the latest.
+- `alembic downgrade -1`: Revert the last applied migration.
+- `alembic history`: Show migration history.
+- `alembic current`: Show current revision.
+
+Ensure your `DATABASE_URL` environment variable is set correctly and accessible when running these commands, as `env.py` is configured to use it via `app.config.settings`.
+The `PYTHONPATH` should also be set to the root of the project or `prepend_sys_path = .` in `alembic.ini` should be working to find `app.config` and `app.models`.
+We have used `sys.path.append` in `env.py` to help with module resolution.
+
+Example command from `auth_service` root directory:
+`DATABASE_URL="mysql+asyncmy://user:pass@host/db" alembic revision -m "create_initial_tables"`
+`DATABASE_URL="mysql+asyncmy://user:pass@host/db" alembic upgrade head`
+
+Alternatively, ensure `.env` is loaded or variables are exported in your shell.
